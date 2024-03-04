@@ -1,0 +1,8 @@
+created_at: 2023-12-20 22:17:24.292660
+os_info: nt
+username: mongoDB
+content: 
+23-12-20 22:17:28 Navigated to prediction module. Please set a prediction task.
+23-12-20 22:17:30 Prediction Initializing: predict_data_dir->, model_dir->, output_dir->
+23-12-20 22:17:30 Error initilizing prediction: name 'start_predict' is not defined
+23-12-20 22:17:37 Application closed.

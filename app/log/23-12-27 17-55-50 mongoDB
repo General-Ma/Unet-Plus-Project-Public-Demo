@@ -1,0 +1,8 @@
+created_at: 2023-12-27 17:55:50.590344
+os_info: nt
+username: mongoDB
+content: 
+23-12-27 17:55:53 Navigated to prediction module. Please set a prediction task.
+23-12-27 17:56:14 Prediction Initializing: predict_data_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/predicted images folder, model_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/real test model, output_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/testsaveimages
+23-12-27 17:56:14 Error initilizing prediction: start_predict() got an unexpected keyword argument 'output_mask_dir_dir'
+23-12-27 17:56:20 Application closed.

@@ -1,0 +1,10 @@
+created_at: 2023-12-08 15:19:10.242757
+os_info: nt
+username: mongoDB
+content: 
+23-12-08 16:52:26 Navigated to train module. Please train your model.
+23-12-08 17:22:14 Attempt to train with following parameters: orig_data_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/original images,            mask_data_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/true ground images, model_type->b_unet, epoch->5
+23-12-08 17:22:18 Start Training ...
+23-12-08 17:23:28 Training Finished
+23-12-08 17:26:57 Model saved successfully at E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/test model
+23-12-08 23:38:34 Application closed.

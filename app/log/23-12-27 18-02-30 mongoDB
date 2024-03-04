@@ -1,0 +1,10 @@
+created_at: 2023-12-27 18:02:30.085563
+os_info: nt
+username: mongoDB
+content: 
+23-12-27 18:02:34 Navigated to prediction module. Please set a prediction task.
+23-12-27 18:03:55 Prediction Initializing: predict_data_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/to be predicted images, model_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/real test model, output_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/testsaveimages
+23-12-27 18:04:02 Prediction Finished.
+23-12-27 18:04:31 Prediction Initializing: predict_data_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/to be predicted images, model_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/test model, output_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/testsaveimages
+23-12-27 18:04:35 Prediction Finished.
+23-12-27 18:05:37 Application closed.

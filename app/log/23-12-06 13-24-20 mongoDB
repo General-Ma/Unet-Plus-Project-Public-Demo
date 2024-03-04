@@ -1,0 +1,9 @@
+created_at: 2023-12-06 13:24:20.129101
+os_info: nt
+username: mongoDB
+content: 
+23-12-06 13:24:34 Navigated to train module. Please train your model.
+23-12-06 13:24:49 Attempt to train with following parameters: orig_data_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/original images,            mask_data_dir->E:/CJEL Imaging pty ltd/my work/github_repo/Cjel-Nets-Prototypes/data/true ground images, model_type->b_unet, epoch->5
+23-12-06 13:24:49 Start Training ... (This may take a few minutes)
+23-12-06 13:24:50 Error initilizing training: local variable 'model' referenced before assignment
+23-12-06 13:25:35 Application closed.
