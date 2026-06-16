@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="200" viewBox="0 0 720 200">
+  <rect width="720" height="200" fill="#fff"/>
+  <text x="20" y="28" font-size="18" fill="#222">Segmentation example</text>
+
+  <g>
+    <rect x="20" y="48" width="320" height="120" fill="#eef3ff" stroke="#c6d9ff"/>
+    <circle cx="180" cy="108" r="40" fill="#bcd" stroke="#7c9"/>
+    <text x="180" y="180" font-size="12" fill="#556" text-anchor="middle">Original image</text>
+  </g>
+
+  <g>
+    <rect x="380" y="48" width="320" height="120" fill="#fff6f6" stroke="#ffdede"/>
+    <rect x="420" y="80" width="160" height="56" fill="#ff6b6b" opacity="0.6"/>
+    <circle cx="500" cy="108" r="40" fill="#ff6b6b" opacity="0.45"/>
+    <text x="540" y="180" font-size="12" fill="#556" text-anchor="middle">Model prediction (overlay)</text>
+  </g>
+</svg>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="240" viewBox="0 0 800 240">
+  <rect width="800" height="240" fill="#f8f9fb"/>
+  <text x="20" y="28" font-size="18" fill="#222">Model architecture (simplified)</text>
+  <!-- Encoder blocks -->
+  <g font-family="sans-serif">
+    <rect x="40" y="60" width="120" height="40" rx="6" fill="#dfe7ff" stroke="#3b6df6"/>
+    <text x="100" y="86" font-size="12" text-anchor="middle" fill="#08306b">Encoder</text>
+
+    <rect x="180" y="60" width="120" height="40" rx="6" fill="#dfe7ff" stroke="#3b6df6"/>
+    <text x="240" y="86" font-size="12" text-anchor="middle" fill="#08306b">Downsample</text>
+
+    <rect x="320" y="60" width="120" height="40" rx="6" fill="#bfeedd" stroke="#2ca02c"/>
+    <text x="380" y="86" font-size="12" text-anchor="middle" fill="#045a3d">Bottleneck</text>
+
+    <rect x="460" y="60" width="120" height="40" rx="6" fill="#ffdfe0" stroke="#d62728"/>
+    <text x="520" y="86" font-size="12" text-anchor="middle" fill="#6b0303">Upsample</text>
+
+    <rect x="600" y="60" width="120" height="40" rx="6" fill="#ffdfe0" stroke="#d62728"/>
+    <text x="660" y="86" font-size="12" text-anchor="middle" fill="#6b0303">Decoder</text>
+
+    <!-- Skip connections -->
+    <path d="M160 80 C200 80, 280 100, 320 100" stroke="#888" fill="none" stroke-dasharray="4"/>
+    <path d="M440 80 C480 80, 560 100, 600 100" stroke="#888" fill="none" stroke-dasharray="4"/>
+  </g>
+</svg>
