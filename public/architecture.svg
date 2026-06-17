@@ -1,26 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="240" viewBox="0 0 800 240">
-  <rect width="800" height="240" fill="#f8f9fb"/>
-  <text x="20" y="28" font-size="18" fill="#222">Model architecture (simplified)</text>
-  <!-- Encoder blocks -->
-  <g font-family="sans-serif">
-    <rect x="40" y="60" width="120" height="40" rx="6" fill="#dfe7ff" stroke="#3b6df6"/>
-    <text x="100" y="86" font-size="12" text-anchor="middle" fill="#08306b">Encoder</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="560" viewBox="0 0 1040 560" role="img" aria-labelledby="title desc">
+  <title id="title">2D segmentation model architecture used by the demo</title>
+  <desc id="desc">A correctness-first diagram of the 2D UNet-style model family: 200 by 200 by 1 input, three downsampling stages, a bottleneck, three upsampling stages with skip concatenation, and a one-channel sigmoid mask output.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#344054"/>
+    </marker>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: 700 22px Arial, sans-serif; fill: #111827; }
+      .subtitle { font: 14px Arial, sans-serif; fill: #475467; }
+      .label { font: 700 14px Arial, sans-serif; fill: #111827; }
+      .small { font: 12px Arial, sans-serif; fill: #344054; }
+      .tiny { font: 11px Arial, sans-serif; fill: #475467; }
+      .block { stroke-width: 1.5; rx: 8; }
+      .input { fill: #f8fafc; stroke: #64748b; }
+      .enc { fill: #e0f2fe; stroke: #0284c7; }
+      .bridge { fill: #ecfdf3; stroke: #16a34a; }
+      .dec { fill: #fef3c7; stroke: #d97706; }
+      .out { fill: #fee2e2; stroke: #dc2626; }
+      .op { fill: #f2f4f7; stroke: #98a2b3; }
+      .flow { fill: none; stroke: #344054; stroke-width: 1.6; marker-end: url(#arrow); }
+      .skip { fill: none; stroke: #2563eb; stroke-width: 1.8; stroke-dasharray: 6 5; marker-end: url(#arrow); }
+      .res { fill: none; stroke: #9333ea; stroke-width: 1.5; stroke-dasharray: 2 4; marker-end: url(#arrow); }
+    </style>
+  </defs>
 
-    <rect x="180" y="60" width="120" height="40" rx="6" fill="#dfe7ff" stroke="#3b6df6"/>
-    <text x="240" y="86" font-size="12" text-anchor="middle" fill="#08306b">Downsample</text>
+  <rect class="bg" width="1040" height="560"/>
+  <text class="title" x="32" y="40">Model architecture in this demo</text>
+  <text class="subtitle" x="32" y="64">Basic UNet, ResUNet, and U-ResNet share the same encoder-decoder shape; residual additions are present in ResUNet and U-ResNet.</text>
 
-    <rect x="320" y="60" width="120" height="40" rx="6" fill="#bfeedd" stroke="#2ca02c"/>
-    <text x="380" y="86" font-size="12" text-anchor="middle" fill="#045a3d">Bottleneck</text>
+  <!-- Main forward path -->
+  <g>
+    <rect class="block input" x="32" y="140" width="118" height="76"/>
+    <text class="label" x="91" y="166" text-anchor="middle">Input slice</text>
+    <text class="small" x="91" y="188" text-anchor="middle">200 x 200 x 1</text>
+    <text class="tiny" x="91" y="207" text-anchor="middle">PNG or TIFF</text>
 
-    <rect x="460" y="60" width="120" height="40" rx="6" fill="#ffdfe0" stroke="#d62728"/>
-    <text x="520" y="86" font-size="12" text-anchor="middle" fill="#6b0303">Upsample</text>
+    <rect class="block enc" x="184" y="120" width="130" height="96"/>
+    <text class="label" x="249" y="149" text-anchor="middle">Encoder 1</text>
+    <text class="small" x="249" y="171" text-anchor="middle">2 x Conv2D 3x3</text>
+    <text class="tiny" x="249" y="190" text-anchor="middle">16 channels</text>
+    <text class="tiny" x="249" y="207" text-anchor="middle">BatchNorm after convs</text>
 
-    <rect x="600" y="60" width="120" height="40" rx="6" fill="#ffdfe0" stroke="#d62728"/>
-    <text x="660" y="86" font-size="12" text-anchor="middle" fill="#6b0303">Decoder</text>
+    <rect class="block op" x="346" y="145" width="86" height="46"/>
+    <text class="small" x="389" y="173" text-anchor="middle">MaxPool</text>
 
-    <!-- Skip connections -->
-    <path d="M160 80 C200 80, 280 100, 320 100" stroke="#888" fill="none" stroke-dasharray="4"/>
-    <path d="M440 80 C480 80, 560 100, 600 100" stroke="#888" fill="none" stroke-dasharray="4"/>
+    <rect class="block enc" x="464" y="120" width="130" height="96"/>
+    <text class="label" x="529" y="149" text-anchor="middle">Encoder 2</text>
+    <text class="small" x="529" y="171" text-anchor="middle">2 x Conv2D 3x3</text>
+    <text class="tiny" x="529" y="190" text-anchor="middle">32 channels</text>
+    <text class="tiny" x="529" y="207" text-anchor="middle">100 x 100</text>
+
+    <rect class="block op" x="626" y="145" width="86" height="46"/>
+    <text class="small" x="669" y="173" text-anchor="middle">MaxPool</text>
+
+    <rect class="block enc" x="744" y="120" width="130" height="96"/>
+    <text class="label" x="809" y="149" text-anchor="middle">Encoder 3</text>
+    <text class="small" x="809" y="171" text-anchor="middle">2 x Conv2D 3x3</text>
+    <text class="tiny" x="809" y="190" text-anchor="middle">64 channels</text>
+    <text class="tiny" x="809" y="207" text-anchor="middle">50 x 50</text>
+
+    <rect class="block op" x="906" y="145" width="86" height="46"/>
+    <text class="small" x="949" y="173" text-anchor="middle">MaxPool</text>
+  </g>
+
+  <g>
+    <rect class="block bridge" x="744" y="284" width="130" height="96"/>
+    <text class="label" x="809" y="313" text-anchor="middle">Bottleneck</text>
+    <text class="small" x="809" y="335" text-anchor="middle">2 x Conv2D 3x3</text>
+    <text class="tiny" x="809" y="354" text-anchor="middle">128 channels</text>
+    <text class="tiny" x="809" y="371" text-anchor="middle">25 x 25</text>
+  </g>
+
+  <g>
+    <rect class="block op" x="626" y="309" width="86" height="46"/>
+    <text class="small" x="669" y="328" text-anchor="middle">Conv2D</text>
+    <text class="small" x="669" y="345" text-anchor="middle">Transpose</text>
+
+    <rect class="block dec" x="464" y="284" width="130" height="96"/>
+    <text class="label" x="529" y="313" text-anchor="middle">Decoder 3</text>
+    <text class="small" x="529" y="335" text-anchor="middle">concat skip + convs</text>
+    <text class="tiny" x="529" y="354" text-anchor="middle">64 channels</text>
+    <text class="tiny" x="529" y="371" text-anchor="middle">50 x 50</text>
+
+    <rect class="block op" x="346" y="309" width="86" height="46"/>
+    <text class="small" x="389" y="328" text-anchor="middle">Conv2D</text>
+    <text class="small" x="389" y="345" text-anchor="middle">Transpose</text>
+
+    <rect class="block dec" x="184" y="284" width="130" height="96"/>
+    <text class="label" x="249" y="313" text-anchor="middle">Decoder 2</text>
+    <text class="small" x="249" y="335" text-anchor="middle">concat skip + convs</text>
+    <text class="tiny" x="249" y="354" text-anchor="middle">32 channels</text>
+    <text class="tiny" x="249" y="371" text-anchor="middle">100 x 100</text>
+
+    <rect class="block op" x="66" y="309" width="86" height="46"/>
+    <text class="small" x="109" y="328" text-anchor="middle">Conv2D</text>
+    <text class="small" x="109" y="345" text-anchor="middle">Transpose</text>
+  </g>
+
+  <g>
+    <rect class="block dec" x="184" y="438" width="130" height="78"/>
+    <text class="label" x="249" y="466" text-anchor="middle">Decoder 1</text>
+    <text class="small" x="249" y="488" text-anchor="middle">concat skip + convs</text>
+    <text class="tiny" x="249" y="506" text-anchor="middle">16 channels, 200 x 200</text>
+
+    <rect class="block out" x="464" y="438" width="130" height="78"/>
+    <text class="label" x="529" y="466" text-anchor="middle">Output layer</text>
+    <text class="small" x="529" y="488" text-anchor="middle">Conv2D 1x1</text>
+    <text class="tiny" x="529" y="506" text-anchor="middle">sigmoid mask</text>
+
+    <rect class="block out" x="744" y="438" width="130" height="78"/>
+    <text class="label" x="809" y="466" text-anchor="middle">Prediction</text>
+    <text class="small" x="809" y="488" text-anchor="middle">200 x 200 x 1</text>
+    <text class="tiny" x="809" y="506" text-anchor="middle">probability map</text>
+  </g>
+
+  <!-- Forward arrows -->
+  <path class="flow" d="M150 178 L184 178"/>
+  <path class="flow" d="M314 168 L346 168"/>
+  <path class="flow" d="M432 168 L464 168"/>
+  <path class="flow" d="M594 168 L626 168"/>
+  <path class="flow" d="M712 168 L744 168"/>
+  <path class="flow" d="M874 168 L906 168"/>
+  <path class="flow" d="M949 191 C949 240 880 262 835 284"/>
+  <path class="flow" d="M744 332 L712 332"/>
+  <path class="flow" d="M626 332 L594 332"/>
+  <path class="flow" d="M464 332 L432 332"/>
+  <path class="flow" d="M346 332 L314 332"/>
+  <path class="flow" d="M184 332 L152 332"/>
+  <path class="flow" d="M109 355 C109 426 160 477 184 477"/>
+  <path class="flow" d="M314 477 L464 477"/>
+  <path class="flow" d="M594 477 L744 477"/>
+
+  <!-- UNet skip connections from encoder features into matching decoder blocks -->
+  <path class="skip" d="M809 216 C809 242 658 258 529 284"/>
+  <path class="skip" d="M529 216 C529 248 392 258 249 284"/>
+  <path class="skip" d="M249 216 C150 258 150 402 249 438"/>
+
+  <!-- Residual note -->
+  <path class="res" d="M908 302 C970 318 970 388 912 410"/>
+  <text class="small" x="922" y="424">ResUNet / U-ResNet:</text>
+  <text class="tiny" x="922" y="442">extra Add() residual paths</text>
+  <text class="tiny" x="922" y="460">inside encoder/decoder blocks</text>
+
+  <g>
+    <line x1="32" y1="532" x2="88" y2="532" class="flow"/>
+    <text class="tiny" x="98" y="536">forward tensor flow</text>
+    <line x1="244" y1="532" x2="300" y2="532" class="skip"/>
+    <text class="tiny" x="310" y="536">UNet skip concatenation</text>
+    <line x1="498" y1="532" x2="554" y2="532" class="res"/>
+    <text class="tiny" x="564" y="536">optional residual addition in ResUNet variants</text>
   </g>
 </svg>
